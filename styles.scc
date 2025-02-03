@@ -1,0 +1,79 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8e9; 
+    color: #333; 
+}
+
+header {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+section {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    margin-bottom: 20px; 
+}
+
+footer {
+    background-color: #343a40; 
+    color: #fff; 
+    padding: 10px 0; 
+    text-align: center; 
+    position: relative; 
+    bottom: 0;
+    width: 100%;
+}
+
+h2 {
+    color: #4CAF50; /* Verde para los encabezados de sección */
+}
+
+/* Estilos para los botones */
+.btn-success {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.btn-success:hover {
+    background-color: #45a049;
+    border-color: #45a049;
+}
+
+/* Estilos para la sección de clima */
+#clima-actual {
+    background-color: #e6f2ff; /* Un azul muy claro para el fondo */
+    border: 1px solid #99ccff; /* Borde azul claro */
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+#clima-actual p {
+    margin-bottom: 8px; 
+}
+
+#icono-clima {
+    width: 60px;
+    height: 60px;
+    vertical-align: middle;
+    margin-right: 10px; 
+}
+
+
+#graficoContainer {
+    margin-top: 20px;
+}
+
+
+#consejos img {
+    border-radius: 8px; 
+    margin-bottom: 10px; 
+}
+
+
+footer p {
+    margin: 0; 
+}
