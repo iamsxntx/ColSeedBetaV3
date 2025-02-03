@@ -1,19 +1,19 @@
 const requisitosCultivos = {
-    mora: { luminosidad: "6-8 horas", precipitacion: "800-1200 mm", humedad: "60-70%", temperatura: "15-25°C" },
-    lulo: { luminosidad: "8-10 horas", precipitacion: "1000-1500 mm", humedad: "70-80%", temperatura: "15-20°C" },
-    frijol: { luminosidad: "6-8 horas", precipitacion: "500-800 mm", humedad: "50-60%", temperatura: "20-30°C" },
-    cafe: { luminosidad: "5-7 horas", precipitacion: "1000-1500 mm", humedad: "70-80%", temperatura: "18-24°C" },
-    maiz: { luminosidad: "10-12 horas", precipitacion: "600-800 mm", humedad: "55-75%", temperatura: "20-30°C" },
-    arveja: { luminosidad: "6-8 horas", precipitacion: "500-600 mm", humedad: "50-70%", temperatura: "15-20°C" },
-    yuca: { luminosidad: "8-10 horas", precipitacion: "1000-1200 mm", humedad: "60-70%", temperatura: "25-30°C" },
-    auyama: { luminosidad: "6-8 horas", precipitacion: "800-1000 mm", humedad: "60-70%", temperatura: "20-25°C" },
-    papa: { luminosidad: "8-10 horas", precipitacion: "600-800 mm", humedad: "70-80%", temperatura: "15-20°C" },
-    cebolla: { luminosidad: "10-12 horas", precipitacion: "500-600 mm", humedad: "60-70%", temperatura: "15-20°C" },
-    tomate: { luminosidad: "8-10 horas", precipitacion: "600-800 mm", humedad: "60-70%", temperatura: "20-25°C" },
-    naranjas: { luminosidad: "8-10 horas", precipitacion: "600-800 mm", humedad: "50-60%", temperatura: "25-30°C" },
+    mora: { luminosidad: [6, 8], precipitacion: [800, 1200], humedad: [60, 70], temperatura: [15, 25] },
+    lulo: { luminosidad: [8, 10], precipitacion: [1000, 1500], humedad: [70, 80], temperatura: [15, 20] },
+    frijol: { luminosidad: [6, 8], precipitacion: [500, 800], humedad: [50, 60], temperatura: [20, 30] },
+    cafe: { luminosidad: [5, 7], precipitacion: [1000, 1500], humedad: [70, 80], temperatura: [18, 24] },
+    maiz: { luminosidad: [10, 12], precipitacion: [600, 800], humedad: [55, 75], temperatura: [20, 30] },
+    arveja: { luminosidad: [6, 8], precipitacion: [500, 600], humedad: [50, 70], temperatura: [15, 20] },
+    yuca: { luminosidad: [8, 10], precipitacion: [1000, 1200], humedad: [60, 70], temperatura: [25, 30] },
+    auyama: { luminosidad: [6, 8], precipitacion: [800, 1000], humedad: [60, 70], temperatura: [20, 25] },
+    papa: { luminosidad: [8, 10], precipitacion: [600, 800], humedad: [70, 80], temperatura: [15, 20] },
+    cebolla: { luminosidad: [10, 12], precipitacion: [500, 600], humedad: [60, 70], temperatura: [15, 20] },
+    tomate: { luminosidad: [8, 10], precipitacion: [600, 800], humedad: [60, 70], temperatura: [20, 25] },
+    naranjas: { luminosidad: [8, 10], precipitacion: [600, 800], humedad: [50, 60], temperatura: [25, 30] },
 };
 
-let chart; 
+let chart;
 
 function analizarCultivo() {
     const cultivo = document.getElementById("cultivo").value;
@@ -21,14 +21,14 @@ function analizarCultivo() {
 
     const requisitos = requisitosCultivos[cultivo];
 
-    if (requisitos) { 
+    if (requisitos) {
         resultadosDiv.innerHTML = `
             <h3>Requisitos para cultivar ${cultivo.charAt(0).toUpperCase() + cultivo.slice(1)}:</h3>
             <ul>
-                <li><strong>Luminosidad:</strong> ${requisitos.luminosidad}</li>
-                <li><strong>Precipitación:</strong> ${requisitos.precipitacion}</li>
-                <li><strong>Humedad:</strong> ${requisitos.humedad}</li>
-                <li><strong>Temperatura:</strong> ${requisitos.temperatura}</li>
+                <li><strong>Luminosidad:</strong> ${requisitos.luminosidad[0]} - ${requisitos.luminosidad[1]} horas</li>
+                <li><strong>Precipitación:</strong> ${requisitos.precipitacion[0]} - ${requisitos.precipitacion[1]} mm</li>
+                <li><strong>Humedad:</strong> ${requisitos.humedad[0]} - ${requisitos.humedad[1]} %</li>
+                <li><strong>Temperatura:</strong> ${requisitos.temperatura[0]} - ${requisitos.temperatura[1]} °C</li>
             </ul>
             <p>¡Verifica si las condiciones de tu suelo son adecuadas!</p>
         `;
@@ -36,7 +36,7 @@ function analizarCultivo() {
         mostrarGrafico(requisitos);
     } else {
         resultadosDiv.innerHTML = "<p>No se encontraron requisitos para este cultivo.</p>";
-        mostrarGrafico(null); 
+        mostrarGrafico(null);
     }
 }
 
@@ -60,7 +60,7 @@ function mostrarGrafico(requisitos) {
         chart.destroy();
     }
 
-    if (requisitos) { 
+    if (requisitos) {
         chart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -69,10 +69,10 @@ function mostrarGrafico(requisitos) {
                     {
                         label: 'Requisitos óptimos',
                         data: [
-                            parseFloat(requisitos.luminosidad.split('-')[0]),
-                            parseFloat(requisitos.precipitacion.split('-')[0]),
-                            parseFloat(requisitos.humedad.split('-')[0]),
-                            parseFloat(requisitos.temperatura.split('-')[0])
+                            requisitos.luminosidad[0],
+                            requisitos.precipitacion[0],
+                            requisitos.humedad[0],
+                            requisitos.temperatura[0]
                         ],
                         backgroundColor: 'rgba(76, 175, 80, 0.8)',
                         borderColor: 'rgba(76, 175, 80, 1)',
@@ -80,7 +80,7 @@ function mostrarGrafico(requisitos) {
                     },
                     {
                         label: 'Condiciones actuales',
-                        data: [9, 650, 62, 21], 
+                        data: [9, 650, 62, 21], // Simulación de datos actuales
                         backgroundColor: 'rgba(255, 99, 132, 0.8)',
                         borderColor: 'rgba(255, 99, 132, 1)',
                         borderWidth: 1
