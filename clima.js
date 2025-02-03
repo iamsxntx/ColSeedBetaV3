@@ -1,21 +1,21 @@
-const apiKey = "TU_CLAVE_DE_API"; 
+const apiKey = "YOUR_ACTUAL_API_KEY"; // Replace with your OpenWeatherMap API key
 
 function obtenerClima(ciudad) {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${apiKey}&units=metric&lang=es`; // &lang=es para obtener datos en español
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${apiKey}&units=metric&lang=es`;
 
     fetch(url)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error al obtener datos: ${response.status} ${response.statusText}`);
             }
-            return response.json(); 
+            return response.json();
         })
         .then(data => {
             const temperatura = data.main.temp;
             const humedad = data.main.humidity;
             const viento = data.wind.speed;
-            const descripcion = data.weather[0].description; 
-            const icono = data.weather[0].icon; 
+            const descripcion = data.weather[0].description;
+            const icono = data.weather[0].icon;
 
             document.getElementById("temperatura").textContent = temperatura;
             document.getElementById("humedad").textContent = humedad;
@@ -23,8 +23,8 @@ function obtenerClima(ciudad) {
             document.getElementById("descripcion").textContent = descripcion;
 
             const iconoClima = document.getElementById("icono-clima");
-            iconoClima.src = `https://openweathermap.org/img/w/${icono}.png`; 
-            iconoClima.alt = descripcion; 
+            iconoClima.src = `https://openweathermap.org/img/w/${icono}.png`;
+            iconoClima.alt = descripcion;
         })
         .catch(error => {
             console.error("Error al obtener datos:", error);
@@ -35,16 +35,15 @@ function obtenerClima(ciudad) {
         });
 }
 
-
 navigator.geolocation.getCurrentPosition(
     (position) => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
-        obtenerClima(`${lat},${lon}`); 
+        obtenerClima(`${lat},${lon}`);
     },
     (error) => {
         console.error("Error al obtener la ubicación:", error);
-        obtenerClima("Bogota"); 
+        obtenerClima("Bogota");
     }
 );
 
@@ -60,4 +59,4 @@ setInterval(() => {
             obtenerClima("Bogota");
         }
     );
-}, 600000); 
+}, 600000);
